@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  
+  frontend:
+    container_name: frontend
+    image: frontend
+    build:
+      context: .
+      dockerfile: src/frontend/Dockerfile
+      target: development
+    volumes:
+      # Mount the code in a volume so that the changes will sync with the container while developing.
+      - ./packages:/app/packages
+      - ./src/frontend:/app/src/frontend
+    ports:
+      # The ports must be the same otherwise, the watch will not work.
+      - 3000:3000
